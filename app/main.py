@@ -39,7 +39,7 @@ app.add_middleware(
 app.include_router(predict.router)
 app.include_router(auth.router)
 
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 app.mount('/uploads',StaticFiles(directory='uploads'),name='uploads')
 

@@ -1,17 +1,17 @@
 FROM python:3.10-slim
 
-ENV PYTHONWRITEBYTECODE=1 PYTHONUNBUFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 
-RUN apt-get update && apt-get install -y --install-no-recommends libgl1 libglib2.0-0 && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY requirements.txt
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY ..
+COPY . .
 
 EXPOSE 8000
 
-CMD ["uvicorn","app.main:app","--host","0.0.0.0","--port","8000"]
+CMD ["sh","-c","alembic","upgrade","head","&&","gunicorn","-w","2","-k","uvicorn.workers.UvicornWorker","app_build.main:app","--bind","0.0.0.0:8000"]

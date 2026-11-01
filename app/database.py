@@ -7,7 +7,7 @@ from .config import settings
 
 password=urllib.parse.quote_plus(settings.DB_PASSWORD)
 
-db_url=f"postgresql+psycopg2://{settings.DB_USERNAME}:{password}@{settings.DB_HOSTNAME}:{settings.DB_PORT}/{settings.DB_NAME}"
+db_url=f"postgresql+psycopg2://{settings.DB_USERNAME}:{password}@{settings.DB_HOSTNAME }:{settings.DB_PORT}/{settings.DB_NAME}"
 
 engine=create_engine(db_url)
 
