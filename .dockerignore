@@ -1,0 +1,25 @@
+# Virtual Environments
+cvenv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Heavy Datasets & Training Artefacts (not needed for inference)
+Plant_leave_diseases_dataset_with_augmentation/
+test_data/
+tuner_logs/
+gpu_files/
+
+# Documentation & Presentations
+*.ipynb
+*.pdf
+*.docx
+*.pptx
+
+# Git & OS metadata
+.git/
+.gitignore
+.DS_Store

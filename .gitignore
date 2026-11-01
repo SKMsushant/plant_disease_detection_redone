@@ -1,0 +1,25 @@
+# Environment & Secrets (CRITICAL)
+.env
+
+# Python Caches & Environments
+__pycache__/
+*.py[cod]
+cvenv/
+venv/
+env/
+
+# Datasets & Heavy Training Artifacts (Crucial - GitHub will reject these)
+Plant_leave_diseases_dataset_with_augmentation/
+test_data/
+tuner_logs/
+gpu_files/
+
+# Runtime Storage
+uploads/
+!uploads/.gitkeep
+
+# Reports & Presentations (Optional: ignore if >100MB)
+*.ipynb
+*.pdf
+*.docx
+*.pptx
