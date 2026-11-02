@@ -28,7 +28,7 @@ def register_user(user_data:user.UserRegister,db:Session=Depends(get_db)):
         existing_user=db.query(Users).filter(Users.email==user_data.email | Users.phonenumber==user_data.phonenumber).first()
 
         if (existing_user.is_2fa_enabled) or (existing_user.is_2fa_enabled):
-            raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="User is already registerd. Please Login")
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT,detail="User is already registerd. Please Login.....")
         
         time_elapsed=datetime.now(timezone.utc)-existing_user.created_at
         if time_elapsed>timedelta(minutes=30):

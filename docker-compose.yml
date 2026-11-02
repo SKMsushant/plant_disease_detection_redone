@@ -35,6 +35,7 @@ services:
       sh -c "alembic upgrade head && gunicorn -w 2 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000"
     volumes:
       - ./uploads:/app/uploads
+      - ./db_alembic:/app/db_alembic
 
   nginx:
     image: nginx:1.27-alpine
