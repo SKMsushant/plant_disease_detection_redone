@@ -6,7 +6,7 @@ on:
 jobs:
   build-and-push:
     name: build & push docker image
-    runs_on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: checkout code
         uses: actions/checkout@v4
@@ -28,20 +28,20 @@ jobs:
           cache_from: type=gha
           cache_to: type=gha,mode=max
 
-deploy:
-  name: deploy to EC2
-  needs: build and push
-  runs-on: ubuntu-latest
-  steps:
-    - name: Deploy Image on VM via SSH
-    - uses: appleboy/ssh-action@v1.0.3
-    - with:
-        host: ${{secrets.EC2_HOST}}
-        username: ${{secrets.EC2_USERNAME}}
-        key: ${{secrets.EC2_SSH_KEY}}
-        script: |
-          cd -/app
-          git pull origin main
-          docker compose pull web
-          docker compose up -d --no-deps web
-          docker image prune -f
+  deploy:
+    name: deploy to EC2
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Image on VM via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.EC2_HOST}}
+          username: ${{secrets.EC2_USERNAME}}
+          key: ${{secrets.EC2_SSH_KEY}}
+          script: |
+            cd -/plant_disease_detection_redone
+            git pull origin main
+            docker compose pull web
+            docker compose up -d --no-deps web
+            docker image prune -f
